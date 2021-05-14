@@ -10,7 +10,7 @@ export default function Header() {
         <div className={styles.headerWrapper}>
             <img src={logo} alt="logo"/>
             <div className={styles.links}>
-                <a href="i">Sobre</a>
+                <a href="about">Sobre</a>
                 <a href="login">Login</a>
             </div>
         </div>
