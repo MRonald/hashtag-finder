@@ -1,9 +1,11 @@
 import './styles/global.css';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes';
 
 export default function App() {
   return (
-    <div>
-        Hashtag Finder
-    </div>
+    <BrowserRouter>
+        <Routes />
+    </BrowserRouter>
   );
 }
