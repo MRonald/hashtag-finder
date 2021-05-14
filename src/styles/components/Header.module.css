@@ -1,0 +1,21 @@
+.headerWrapper {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #092E8A;
+}
+.headerWrapper .links {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.headerWrapper .links a {
+    padding: 8px 30px;
+    background-color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+
+}
