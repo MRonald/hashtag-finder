@@ -3,6 +3,7 @@
     width: 100vw;
     background: url(../../assets/img/hero-bg.jpg);
     background-repeat: no-repeat;
+    background-size: cover;
 }
 .hero .heroContent {
     width: 75%;
@@ -19,4 +20,25 @@
 .hero .heroContent h2 {
     font-weight: 400;
     width: 40%;
+}
+.hero .heroContent form {
+    margin: 0 auto 20px;
+    width: 55%;
+    display: flex;
+    background-color: #1E3E7B;
+    border-radius: 100px;
+}
+.hero .heroContent form label img {
+    padding: 25px;
+}
+.hero .heroContent form .inputMain {
+    height: 100%;
+    width: calc(100% - 30px);
+    border: none;
+    background-color: transparent;
+}
+.hero .heroContent form .inputMain::placeholder {
+    color: var(--gray);
+    font-size: 2rem;
+    transform: translateY(5px);
 }
