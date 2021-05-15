@@ -1,21 +1,12 @@
-*{
-    margin: 0;
-    padding: 0;
+.bgabout{
+    background-image: url('../../assets/img/about-hero-bg.jpg');
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    color: white;
 }
-body {
-
-    /* Fundos: */
-        /* Gradiente (meio) */
-    background: linear-gradient(180deg, #0A174400 0%, #0A1744 100%) no-repeat,
-        /* Imagem (topo, por baixo do gradiente) */
-        url(../../assets/img/about-hero-bg.jpg) no-repeat,
-        /* Cor (página inteira) */
-        #0A1744;
-    /* Tamanho e posição do gradiente e imagem */
-    background-size:  100vw 42vmax, auto 100vmax;
-    background-position:  0% 58.5vmax, 0% 0%;
-
-    /* Padrão de texto (fonte e cor) */
-    color: #FCFCFC;
-    font-family: 'Rubik', sans-serif;
+.firstContent{
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
 }
