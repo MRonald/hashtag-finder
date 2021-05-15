@@ -1,68 +1,74 @@
-.containerLogin{
+.containerLogin {
     max-width: 1920px;
     margin: auto;
 }
-.bgLogin{
+
+.bgLogin {
     position: fixed;
     height: 100%;
     width: 100%;
     background-image: url(/src/assets/img/mobile-hero-bg.jpg);
     background-repeat: no-repeat;
 }
-.login{
+
+.login {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     padding: 100px 50px;
     border-radius: 14px;
     background-color: #18326B;
     opacity: 0.7;
     min-width: 400px;
 }
-.titleLogin{
+.titleLogin {
     text-align: center;
     color: #72EFDB;
     padding-bottom: 20px;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bolder;
 }
-
-.buttonLogin{
+.buttonLogin {
     background-color: #72EFDB;
     font-weight: bolder;
     color: #0B1741;
     margin-top: 20px;
     border-radius: 34px;
+    outline: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-color: unset;
+    border-style: unset;
 }
-input{
+.inputLogin {
     border: none;
-    border-bottom: 1px solid #ffffff ;
+    border-bottom: 1px solid #ffffff;
     outline: none;
     background: none;
     padding: 10px;
     margin: 10px 0;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    color: #ffffff;
 }
 ::-webkit-input-placeholder {
     color: #ffffff;
- }
-  
- :-moz-placeholder { /* Firefox 18- */
+}
+:-moz-placeholder {
+    /* Firefox 18- */
     color: #ffffff;
- }
-  
- ::-moz-placeholder {  /* Firefox 19+ */
+}
+::-moz-placeholder {
+    /* Firefox 19+ */
     color: #ffffff;
- }
-  
- :-ms-input-placeholder {  
+}
+:-ms-input-placeholder {
     color: #ffffff;
- }
- @media only screen and (min-width: 414px){
-    .bgLogin{
+}
+@media only screen and (min-width: 514px) {
+    .bgLogin {
         background-image: url(/src/assets/img/hero-bg.jpg);
     }
- }
+}
