@@ -2,20 +2,35 @@
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
-    background-color: #092E8A;
+    background-color: var(--blue-dark);
 }
-.headerWrapper .links {
-    width: 250px;
+
+.headerWrapper .linksWrapper {
+    width: 285px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.headerWrapper .links a {
-    padding: 8px 30px;
-    background-color: white;
+
+.headerWrapper .linksWrapper .about, .headerWrapper .linksWrapper .login {
+    padding: 8px 25px;
     border-radius: 50px;
     text-decoration: none;
     text-transform: uppercase;
     color: black;
+    display: flex;
+}
 
+.headerWrapper .linksWrapper .about img, .headerWrapper .linksWrapper .login img {
+    margin-right: 10px;
+}
+
+.headerWrapper .linksWrapper .about {
+    background-color: #72EFDB;
+    color: #0B1741;
+}
+
+.headerWrapper .linksWrapper .login {
+    background-color: #1E3E7B;
+    color: white;
 }
