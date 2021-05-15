@@ -10,7 +10,9 @@ import userLogin from '../assets/img/icon-user-alt.svg';
 export default function Header() {
     return (
         <div className={styles.headerWrapper}>
-            <img src={logo} alt="logo"/>
+            <a href="/">
+                <img src={logo} alt="logo"/>
+            </a>
             <div className={styles.linksWrapper}>
                 <a href="about" className={styles.about}>
                     <img src={infoCircle} alt=""/>

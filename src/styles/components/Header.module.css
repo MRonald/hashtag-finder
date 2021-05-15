@@ -1,12 +1,17 @@
 .headerWrapper {
+    width: 100vw;
+    height: 90px;
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
-    background-color: var(--blue-dark);
+    background: #0a174483 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 29px #5538EE1F;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
 }
 
 .headerWrapper .linksWrapper {
-    width: 285px;
+    width: 310px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,6 +24,8 @@
     text-transform: uppercase;
     color: black;
     display: flex;
+    font-size: 1.1rem;
+    letter-spacing: 2.55px;
 }
 
 .headerWrapper .linksWrapper .about img, .headerWrapper .linksWrapper .login img {
