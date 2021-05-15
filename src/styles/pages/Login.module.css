@@ -24,7 +24,6 @@
     opacity: 0.7;
     min-width: 400px;
 }
-
 .titleLogin {
     text-align: center;
     color: #72EFDB;
@@ -32,7 +31,6 @@
     font-size: 2rem;
     font-weight: bolder;
 }
-
 .buttonLogin {
     background-color: #72EFDB;
     font-weight: bolder;
@@ -45,7 +43,6 @@
     border-color: unset;
     border-style: unset;
 }
-
 .inputLogin {
     border: none;
     border-bottom: 1px solid #ffffff;
@@ -56,25 +53,20 @@
     font-size: 1rem;
     color: #ffffff;
 }
-
 ::-webkit-input-placeholder {
     color: #ffffff;
 }
-
 :-moz-placeholder {
     /* Firefox 18- */
     color: #ffffff;
 }
-
 ::-moz-placeholder {
     /* Firefox 19+ */
     color: #ffffff;
 }
-
 :-ms-input-placeholder {
     color: #ffffff;
 }
-
 @media only screen and (min-width: 514px) {
     .bgLogin {
         background-image: url(/src/assets/img/hero-bg.jpg);
