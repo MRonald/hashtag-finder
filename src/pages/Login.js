@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from "../styles/pages/Login.module.css"
-// import Header from "../components/Header"
+import Header from "../components/Header"
 
 function Login() {
     return <div className={styles.containerLogin}>
-        {/* <Header /> */}
+        <Header />
         <div className={styles.bgLogin}>
             <div className={styles.login}>
                 <div className={styles.titleLogin}>Login</div>
