@@ -18,7 +18,17 @@ function About() {
                     alt="Ilustração" />
             </div>
         </div>
-    </div>
+        <div className={styles.secondContent}>
+            <div class="wrapper-flex">
+                <div class="container">
+                    <div class='banner-img'></div>
+                        <img src='https://pbs.twimg.com/profile_images/1366466342354751491/JyhZpbtu_400x400.jpg' alt='profile image' class="profile-img"/>
+                        <h1 class="name">Nome Sobrenome</h1>
+                        <p class="description">o que eu fiz no projeto?!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 }
 
 export default About
