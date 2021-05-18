@@ -4,7 +4,7 @@ import Header from "../components/Header"
 
 function Login() {
     return <div className={styles.containerLogin}>
-        <Header />
+        <Header template="login"/>
         <div className={styles.bgLogin}>
             <div className={styles.login}>
                 <div className={styles.titleLogin}>Login</div>
