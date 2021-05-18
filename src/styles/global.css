@@ -20,7 +20,16 @@
     font-family: Rubik, Arial, sans-serif;
 }
 
-body {
+html, body {
     color: white;
-    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+a, input, button {
+    outline: none;
 }
