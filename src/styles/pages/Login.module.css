@@ -1,10 +1,8 @@
 .containerLogin {
-    margin: auto;
     position: fixed;
     height: 100%;
     width: 100%;
-    background-image: url(../../assets/img/mobile-hero-bg.jpg);
-    background-repeat: no-repeat;
+    background: center no-repeat url(../../assets/img/mobile-hero-bg.jpg) padding-box;
     background-size: cover;
 }
 
@@ -19,22 +17,20 @@
     padding: 100px 30px;
     border-radius: 14px;
     background: #18326B;
-    opacity: 0.9;
+    opacity: 0.97;
     min-width: 300px;
 }
 
 .login::before {
-    background-image: url(../../assets/img/mobile-hero-bg.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
     position: absolute;
-    margin: -30px;
     content: '';
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
+    margin: -10px;
     filter: blur(30px);
+    background: center no-repeat url(../../assets/img/mobile-hero-bg.jpg) padding-box;
     z-index: -1;
 }
 
@@ -94,18 +90,10 @@
     .containerLogin {
         background-image: url(../../assets/img/hero-bg.jpg);
     }
-
     .login {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 55%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 100px 50px;
-        border-radius: 14px;
-        background-color: #18326B;
-        opacity: 0.9;
-        min-width: 400px;
+        min-width: 380px;
+    }
+    .login::before {
+        background: center no-repeat url(../../assets/img/hero-bg.jpg) padding-box;
     }
 }
