@@ -5,6 +5,7 @@ import styles from '../styles/pages/Home.module.css';
 
 // Images
 import iconSearch from '../assets/img/icon-search.svg';
+import Footer from '../components/Footer';
 
 export default function Home() {
     return (
@@ -29,6 +30,7 @@ export default function Home() {
                     </form>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }
