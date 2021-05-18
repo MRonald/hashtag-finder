@@ -10,14 +10,21 @@
     -webkit-backdrop-filter: blur(30px);
 }
 
-.headerWrapper .linksWrapper {
-    width: 310px;
+.headerWrapper .linksWrapper,
+.headerWrapper .linkWrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.headerWrapper .linksWrapper .about, .headerWrapper .linksWrapper .login {
+.headerWrapper .linksWrapper {
+    width: 310px;
+}
+
+.headerWrapper .linksWrapper .firstButton,
+.headerWrapper .linksWrapper .secondButton,
+.headerWrapper .linkWrapper .firstButton,
+.headerWrapper .linkWrapper .secondButton {
     padding: 8px 25px;
     border-radius: 50px;
     text-decoration: none;
@@ -28,16 +35,21 @@
     letter-spacing: 2.55px;
 }
 
-.headerWrapper .linksWrapper .about img, .headerWrapper .linksWrapper .login img {
+.headerWrapper .linksWrapper .firstButton img,
+.headerWrapper .linksWrapper .secondButton img,
+.headerWrapper .linkWrapper .firstButton img,
+.headerWrapper .linkWrapper .secondButton img {
     margin-right: 10px;
 }
 
-.headerWrapper .linksWrapper .about {
+.headerWrapper .linksWrapper .firstButton,
+.headerWrapper .linkWrapper .firstButton {
     background-color: #72EFDB;
     color: #0B1741;
 }
 
-.headerWrapper .linksWrapper .login {
+.headerWrapper .linksWrapper .secondButton,
+.headerWrapper .linkWrapper .secondButton {
     background-color: #1E3E7B;
     color: white;
 }
