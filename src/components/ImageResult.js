@@ -7,7 +7,7 @@ import image from '../assets/img/model.png';
 export default function ImageResult({ userName }) {
     return (
         <div
-            class={styles.imageResultWrapper}
+            className={styles.imageResultWrapper}
             style={{ backgroundImage: `url(${image})` }}
         >
             <div className={styles.infoPost}>
