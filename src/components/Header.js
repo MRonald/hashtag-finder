@@ -7,9 +7,12 @@ import infoCircle from '../assets/img/icon-info-circle.svg';
 import userLogin from '../assets/img/icon-user-alt.svg';
 
 
-export default function Header() {
+export default function Header({ fixed }) {
     return (
-        <div className={styles.headerWrapper}>
+        <div
+            className={styles.headerWrapper}
+            style={{position: `${fixed === 'true' ? 'fixed' : 'initial'}`}}
+        >
             <a href="/">
                 <img src={logo} alt="logo"/>
             </a>

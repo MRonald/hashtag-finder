@@ -29,3 +29,7 @@ html, body {
 body::-webkit-scrollbar {
     display: none;
 }
+
+a, input, button {
+    outline: none;
+}
