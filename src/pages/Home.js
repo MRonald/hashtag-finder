@@ -14,7 +14,7 @@ export default function Home() {
     return (
         <div>
             <div className={styles.hero}>
-                <Header fixed="true" />
+                <Header fixed="true" template="home" />
                 <div className={styles.heroContent}>
                     <div>
                         <h1>Encontre hashtags de maneira fácil.</h1>
