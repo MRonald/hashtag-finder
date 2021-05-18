@@ -5,6 +5,7 @@ import styles from '../styles/pages/Home.module.css';
 
 // Images
 import iconSearch from '../assets/img/icon-search.svg';
+import Footer from '../components/Footer';
 
 export default function Home() {
     return (
@@ -17,9 +18,9 @@ export default function Home() {
                         <h2>Digite o que deseja no campo de buscas e confira os resultados do Twitter abaixo</h2>
                     </div>
                     <form>
-                        <label htmlFor="inputMain">
+                        <button>
                             <img src={iconSearch} alt="" />
-                        </label>
+                        </button>
                         <input
                             type="text"
                             placeholder="Buscar..."
@@ -29,6 +30,7 @@ export default function Home() {
                     </form>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }
