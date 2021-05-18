@@ -5,6 +5,7 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .hero .heroContent {
     width: 75%;
     height: calc(100vh - 90px);
@@ -13,14 +14,17 @@
     flex-flow: column;
     justify-content: space-around;
 }
+
 .hero .heroContent h1 {
     font-size: 3.5rem;
     width: 50%;
 }
+
 .hero .heroContent h2 {
     font-weight: 400;
     width: 40%;
 }
+
 .hero .heroContent form {
     margin: 0 auto 20px;
     width: 55%;
@@ -28,14 +32,17 @@
     background-color: #1E3E7B;
     border-radius: 100px;
 }
+
 .hero .heroContent form button {
     background: transparent;
     border: none;
     cursor: pointer;
 }
+
 .hero .heroContent form button img {
     padding: 25px;
 }
+
 .hero .heroContent form .inputMain {
     padding-right: 30px;
     height: 100%;
@@ -45,13 +52,37 @@
     font-size: 2rem;
     color: white;
 }
+
 .hero .heroContent form .inputMain::placeholder {
     color: var(--gray);
     font-size: 2rem;
 }
+
 .hero .heroContent form .inputMain:focus {
     outline: none;
 }
-.mainContent {
-    background-color: #061649;
+
+.mainContentWrapper {
+    width: 100vw;
+    background-color: #09184F;
+}
+
+.mainContentWrapper .mainContent {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: transparent;
+}
+
+.mainContentWrapper .mainContent h2 {
+    text-align: center;
+    font-weight: 500;
+}
+
+.mainContentWrapper .mainContent .imagesResults {
+    width: 41%;
+    display: flex;
+    flex-wrap: wrap;
 }
