@@ -52,3 +52,6 @@
 .hero .heroContent form .inputMain:focus {
     outline: none;
 }
+.mainContent {
+    background-color: #061649;
+}

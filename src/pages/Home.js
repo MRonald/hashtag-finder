@@ -30,6 +30,9 @@ export default function Home() {
                     </form>
                 </div>
             </div>
+            <main className={styles.mainContent}>
+                <h2>Exibindo os 10 resultados mais recentes para #natureza</h2>
+            </main>
             <Footer />
         </div>
     );
