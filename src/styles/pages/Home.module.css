@@ -28,17 +28,27 @@
     background-color: #1E3E7B;
     border-radius: 100px;
 }
-.hero .heroContent form label img {
+.hero .heroContent form button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.hero .heroContent form button img {
     padding: 25px;
 }
 .hero .heroContent form .inputMain {
+    padding-right: 30px;
     height: 100%;
     width: calc(100% - 30px);
     border: none;
     background-color: transparent;
+    font-size: 2rem;
+    color: white;
 }
 .hero .heroContent form .inputMain::placeholder {
     color: var(--gray);
     font-size: 2rem;
-    transform: translateY(5px);
+}
+.hero .heroContent form .inputMain:focus {
+    outline: none;
 }
