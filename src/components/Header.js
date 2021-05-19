@@ -27,34 +27,34 @@ export default function Header({ fixed, template }) {
             */}
             {template === 'home' && (
                 <div className={styles.linksWrapper}>
-                    <a href="about" className={styles.firstButton}>
+                    <Link to="/about" className={styles.firstButton}>
                         <img src={infoCircle} alt=""/>
                         Sobre
-                    </a>
-                    <a href="login" className={styles.secondButton}>
+                    </Link>
+                    <Link to="/login" className={styles.secondButton}>
                         <img src={userLogin} alt=""/>
                         Login
-                    </a>
+                    </Link>
                 </div>
             )}
             {template === 'login' && (
                 <div className={styles.linkWrapper}>
-                    <a href="/" className={styles.firstButton}>
+                    <Link to="/" className={styles.firstButton}>
                         <img src={homeIcon} alt=""/>
                         Home
-                    </a>
+                    </Link>
                 </div>
             )}
             {template === 'tableSearch' && (
                 <div className={styles.linksWrapper}>
-                    <a href="about" className={styles.firstButton}>
+                    <Link to="/" className={styles.firstButton}>
                         <img src={homeIcon} alt=""/>
                         Home
-                    </a>
-                    <a href="login" className={styles.secondButton}>
+                    </Link>
+                    <Link to="/" className={styles.secondButton}>
                         <img src={logoutIcon} alt=""/>
                         Sair
-                    </a>
+                    </Link>
                 </div>
             )}
         </div>
