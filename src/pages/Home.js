@@ -40,7 +40,6 @@ export default function Home() {
                         onClick={() => setButtonActive('tweets')}
                         style={{
                             color: `${buttonActive === 'tweets' ? '#72EFDB' : 'white'}`,
-                            borderBottom: `${buttonActive === 'tweets' ? '3px solid #72EFDB' : '2px solid #41558E'}`
                         }}
                     >
                         Tweets
@@ -49,11 +48,18 @@ export default function Home() {
                         onClick={() => setButtonActive('images')}
                         style={{
                             color: `${buttonActive === 'images' ? '#72EFDB' : 'white'}`,
-                            borderBottom: `${buttonActive === 'images' ? '3px solid #72EFDB' : '2px solid #41558E'}`
                         }}
                     >
                         Imagens
                     </span>
+                </div>
+                <div className={styles.baseButtons}>
+                    <div
+                        style={{
+                            transform: `${buttonActive === 'images' ? 'translateX(100%)' : 'translateX(0%)'}`
+                        }}
+                    >
+                    </div>
                 </div>
             </div>
             <div className={styles.mainContentWrapper}>
@@ -68,9 +74,11 @@ export default function Home() {
                         <ImageResult userName="@twitterusername" />
                         <ImageResult userName="@twitterusername" />
                         <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
                     </div>
                     <div className={styles.textsResults}>
+                        <TextResult name="UserName" userName="@twitterusername" />
+                        <TextResult name="UserName" userName="@twitterusername" />
+                        <TextResult name="UserName" userName="@twitterusername" />
                         <TextResult name="UserName" userName="@twitterusername" />
                         <TextResult name="UserName" userName="@twitterusername" />
                     </div>
