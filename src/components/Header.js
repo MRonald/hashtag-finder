@@ -7,6 +7,7 @@ import infoCircle from '../assets/img/icon-info-circle.svg';
 import userLogin from '../assets/img/icon-user-alt.svg';
 import homeIcon from '../assets/img/icon-home.svg';
 import logoutIcon from '../assets/img/icon-power-off.svg';
+import { Link } from 'react-router-dom';
 
 
 export default function Header({ fixed, template }) {
@@ -15,9 +16,9 @@ export default function Header({ fixed, template }) {
             className={styles.headerWrapper}
             style={{position: `${fixed === 'true' ? 'fixed' : 'initial'}`}}
         >
-            <a href="/">
+            <Link to="/" className={styles.linkImageHome}>
                 <img src={logo} alt="logo"/>
-            </a>
+            </Link>
             {/*
                 Existem 3 templates para os botões:
                     - Template "home"

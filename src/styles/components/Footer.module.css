@@ -7,3 +7,7 @@
     align-items: center;
     font-size: 1.2rem;
 }
+
+.footerWrapper span {
+    padding: 0 15px;
+}

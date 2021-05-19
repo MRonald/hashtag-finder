@@ -53,3 +53,49 @@
     background-color: #1E3E7B;
     color: white;
 }
+
+@media only screen and (max-width: 620px) {
+    .headerWrapper {
+        height: 70px;
+        padding: 15px 20px;
+        align-items: center;
+    }
+
+    .headerWrapper .linkImageHome img {
+        height: 40px;
+        /* display: contents; */
+    }
+
+    .headerWrapper .linksWrapper {
+        width: 280px;
+    }
+
+    .headerWrapper .linksWrapper .firstButton,
+    .headerWrapper .linksWrapper .secondButton,
+    .headerWrapper .linkWrapper .firstButton,
+    .headerWrapper .linkWrapper .secondButton {
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .headerWrapper .linkImageHome img {
+        height: 23px;
+    }
+
+    .headerWrapper .linksWrapper {
+        width: 220px;
+    }
+
+    .headerWrapper .linksWrapper .firstButton,
+    .headerWrapper .linksWrapper .secondButton,
+    .headerWrapper .linkWrapper .firstButton,
+    .headerWrapper .linkWrapper .secondButton {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+
+    .headerWrapper .linksWrapper .firstButton {
+        margin-right: 10px;
+    }
+}
