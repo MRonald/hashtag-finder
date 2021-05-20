@@ -1,0 +1,120 @@
+.body {
+    background-color: #18326B ;
+    width: 100%;
+    height: 100vh;
+    background: url(../../assets/img/table-bg.jpg) no-repeat;
+}
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.container h2{
+    margin: 25px 0;
+    color: #72EFDB;
+}
+
+.list{
+    border-radius: 14px  ;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.listTop{
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.1);
+
+}
+
+.listHeader{
+    display: flex;
+    margin: 0 15px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #72EFDB;
+}
+
+.listHeader .hashtag{
+    text-align: inherit;
+}
+
+.listItems{
+    display: flex;
+    justify-content: flex-end;
+    padding-top:0 ;
+    border-bottom: 1px solid #5985b566 ;
+    margin: 0 15px;
+    font-size: 0.8em;
+    color: #72EFDB;
+}
+
+.listItems .hashtag{
+    color: white;
+}
+
+.listHeader div, .listItems div{
+    padding: 15px;
+
+}
+
+.hashtag{
+   margin-right: auto;
+}
+
+.time{
+    margin: 0 40px 0 50px;
+
+}
+
+
+
+
+
+@media (max-width: 800px){
+    .container{
+        width: 90%;
+    }
+
+    .listHeader{
+        margin-right: 15px;
+    }
+       
+}
+
+
+@media (max-width: 420px){
+   
+    .container{
+        width: 95%;
+    }
+
+    .container h2{
+        text-align: center;
+    }
+    
+    .listHeader{
+       margin: 10px 0 0 0;
+        
+    }
+
+    .listItems{
+        padding: 0 ;
+        margin: 0;
+    }
+
+    .listHeader div, .listItems div{
+        padding: 10px;
+    }
+
+    .time{
+        margin: 0 0 0 20px;    
+    }
+
+    .listTop{
+        border-radius: 14px 14px 0 0;
+    }
+}
