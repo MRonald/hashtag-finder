@@ -2,17 +2,15 @@ import React from 'react';
 
 import styles from '../styles/components/ImageResult.module.css';
 
-import image from '../assets/img/model.png';
-
-export default function ImageResult({ userName }) {
+export default function ImageResult({ result }) {
     return (
         <div
             className={styles.imageResultWrapper}
-            style={{ backgroundImage: `url(${image})` }}
+            style={{ backgroundImage: `url(${result.image_url})` }}
         >
             <div className={styles.infoPost}>
                 <span>Postado por:</span>
-                <span>{userName}</span>
+                <span>{result.author.username}</span>
             </div>
         </div>
     );

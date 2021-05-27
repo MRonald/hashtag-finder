@@ -86,6 +86,10 @@
     font-weight: 500;
 }
 
+.mainContentWrapper ul li {
+    list-style: none;
+}
+
 .mainContentWrapper .mainContent {
     margin: auto;
     padding: 80px 0;
@@ -207,7 +211,6 @@
         background-color: #41558E;
         display: flex;
         align-items: center;
-        transition: all 0.6s;
     }
 
     .transition .baseButtons div {
@@ -215,7 +218,7 @@
         height: 4px;
         background-color: #72EFDB;
         border-radius: 100px;
-        transition: all 0.6s;
+        transition: all 0.5s;
     }
 
     .mainContentWrapper h2,
