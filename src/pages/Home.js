@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ImageResult from '../components/ImageResult';
 import TextResult from '../components/TextResult';
-import { BASE_URL_SEARCH } from '../config';
+import { BASE_URL_SEARCH, URL_IMAGE_TWITTER } from '../config';
 
 // Images
 import iconSearch from '../assets/img/icon-search.svg';
@@ -15,6 +15,8 @@ import iconSearch from '../assets/img/icon-search.svg';
 export default function Home() {
     const [buttonActive, setButtonActive] = useState("images");
     const [textSearch, setTextSearch] = useState("");
+    const [imagesResult, setImagesResult] = useState([]);
+    const [textsResult, setTextsResult] = useState([]);
 
     function getCurrentDate() {
         const date = new Date();
@@ -29,6 +31,14 @@ export default function Home() {
         const hour = String(date.getHours()).padStart(2, '0');
         const minute = String(date.getMinutes()).padStart(2, '0');
         return `${hour}:${minute}`;
+    }
+
+    function getURL(type) {
+        if (type === 'image') {
+            return `https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query=${textSearch} has:hashtags -is:retweet -is:quote -has:links has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height&tweet.fields=source`;
+        } else if (type === 'text') {
+            return `https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query=${textSearch} has:hashtags -is:retweet -is:quote -has:links -has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height&tweet.fields=source`;
+        }
     }
 
     function handleTextChange(event) {
@@ -48,7 +58,8 @@ export default function Home() {
         if (!isValid) {
             alert('preencha o campo')
         } else {
-            registerSearch();
+            //registerSearch();
+            searchPosts();
         }
         setTextSearch("");
     }
@@ -71,6 +82,33 @@ export default function Home() {
                 "Content-Type": "application/json"
             }
         }).catch(e => console.log('erro\n' + e));
+    }
+
+    function searchPosts() {
+        axios.get(getURL('text'), {
+            headers: {
+                "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAFlKHgEAAAAApBW4nRyRkiogluzAbXlS4KuHlMU%3DFcR7r8N19LRnMHLVmYlFsod6Be6zUvZD2rxATotl6mLPAh2UEX"
+            }
+        }).then(
+            response => {
+                const results = response.data.data.map((post, index) => {
+                    return {
+                        "content": post.text,
+                        "url": `https://twitter.com/user/status/${post.id}`,
+                        "user": {
+                            "name": response.data.includes.users[index].name,
+                            "username": response.data.includes.users[index].username,
+                            "profile_image_url": String(response.data.includes.users[index].profile_image_url).replace('normal', 'bigger'),
+                            "url_profile": `https://twitter.com/${response.data.includes.users[index].username}`
+                        }
+                    };
+                });
+                setTextsResult(results);
+                console.log(results);
+            }
+        ).catch(
+            e => console.log(e)
+        );
     }
 
     return (
@@ -128,40 +166,66 @@ export default function Home() {
                 <h2>Exibindo os 10 resultados mais recentes para #natureza</h2>
                 <main className={styles.mainContent}>
                     <div className={styles.imagesResults}>
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
+                        {imagesResult.length === 0 ? (
+                            <div>Carregando</div>
+                        ) : (
+                            <>
+                                <ImageResult userName="@twitterusername" />
+                                <ImageResult userName="@twitterusername" />
+                                <ImageResult userName="@twitterusername" />
+                                <ImageResult userName="@twitterusername" />
+                                <ImageResult userName="@twitterusername" />
+                                <ImageResult userName="@twitterusername" />
+                                <ImageResult userName="@twitterusername" />
+                                <ImageResult userName="@twitterusername" />
+                            </>
+                        )}
                     </div>
                     <div className={styles.textsResults}>
-                        <TextResult name="UserName" userName="@twitterusername" />
-                        <TextResult name="UserName" userName="@twitterusername" />
-                        <TextResult name="UserName" userName="@twitterusername" />
-                        <TextResult name="UserName" userName="@twitterusername" />
-                        <TextResult name="UserName" userName="@twitterusername" />
+                        {textsResult.length === 0 ? (
+                            <div>Carregando</div>
+                        ) : (
+                            <>
+                                <TextResult name="UserName" userName="@twitterusername" />
+                                <TextResult name="UserName" userName="@twitterusername" />
+                                <TextResult name="UserName" userName="@twitterusername" />
+                                <TextResult name="UserName" userName="@twitterusername" />
+                                <TextResult name="UserName" userName="@twitterusername" />
+                            </>
+                        )}
                     </div>
                 </main>
                 <main className={styles.mainContentResponsive}>
                     {buttonActive === 'images' ? (
                         <div className={styles.imagesResults}>
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
+                            {imagesResult.length === 0 ? (
+                                <div>Carregando</div>
+                            ) : (
+                                <>
+                                    <ImageResult userName="@twitterusername" />
+                                    <ImageResult userName="@twitterusername" />
+                                    <ImageResult userName="@twitterusername" />
+                                    <ImageResult userName="@twitterusername" />
+                                    <ImageResult userName="@twitterusername" />
+                                    <ImageResult userName="@twitterusername" />
+                                    <ImageResult userName="@twitterusername" />
+                                    <ImageResult userName="@twitterusername" />
+                                </>
+                            )}
                         </div>
                     ) : (
                         <div className={styles.textsResults}>
-                            <TextResult name="UserName" userName="@twitterusername" />
-                            <TextResult name="UserName" userName="@twitterusername" />
+                            {textsResult.length === 0 ? (
+                                <div>Carregando</div>
+                            ) : (
+                                <>
+                                    <TextResult name="UserName" userName="@twitterusername" />
+                                    <TextResult name="UserName" userName="@twitterusername" />
+                                    <TextResult name="UserName" userName="@twitterusername" />
+                                    <TextResult name="UserName" userName="@twitterusername" />
+                                    <TextResult name="UserName" userName="@twitterusername" />
+                                </>
+                            )}
                         </div>
                     )}
                 </main>
