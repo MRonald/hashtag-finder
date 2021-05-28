@@ -11,6 +11,10 @@ import { Link } from 'react-router-dom';
 
 
 export default function Header({ fixed, template }) {
+    function setLoggedStatus() {
+        sessionStorage.setItem('login', 'false');
+    }
+
     return (
         <div
             className={styles.headerWrapper}
@@ -51,7 +55,7 @@ export default function Header({ fixed, template }) {
                         <img src={homeIcon} alt=""/>
                         Home
                     </Link>
-                    <Link to="/" className={styles.secondButton}>
+                    <Link to="/" className={styles.secondButton} onClick={setLoggedStatus}>
                         <img src={logoutIcon} alt=""/>
                         Sair
                     </Link>
