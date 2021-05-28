@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ImageResult from '../components/ImageResult';
 import TextResult from '../components/TextResult';
-import { BASE_URL_SEARCH } from '../config';
 
 // Images
 import iconSearch from '../assets/img/icon-search.svg';
@@ -41,12 +40,16 @@ export default function Home() {
         return `${hour}:${minute}`;
     }
 
-    function getURL(type, hashtag) {
+    function getURLTwitter(type, hashtag) {
         if (type === 'image') {
             return `https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query=${hashtag} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height&tweet.fields=source`;
         } else if (type === 'text') {
             return `https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query=${hashtag} has:hashtags -is:retweet -is:quote -has:links -has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height&tweet.fields=source`;
         }
+    }
+
+    function getURLAirtable() {
+        return `https://api.airtable.com/v0/app6wQWfM6eJngkD4/Buscas`;
     }
 
     function handleTextChange(event) {
@@ -75,7 +78,7 @@ export default function Home() {
     }
 
     function registerSearch() {
-        axios.post(BASE_URL_SEARCH, {
+        axios.post(getURLAirtable(), {
             "records": [
                 {
                     "fields": {
@@ -101,7 +104,7 @@ export default function Home() {
             }
         }
 
-        axios.get(getURL('image', hashtag), headers).then(
+        axios.get(getURLTwitter('image', hashtag), headers).then(
             response => {
                 const users = {};
                 response.data.includes.users.forEach(
@@ -133,7 +136,7 @@ export default function Home() {
             }
         )
 
-        axios.get(getURL('text', hashtag), headers).then(
+        axios.get(getURLTwitter('text', hashtag), headers).then(
             response => {
                 const users = {};
                 response.data.includes.users.forEach(

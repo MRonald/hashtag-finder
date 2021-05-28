@@ -10,7 +10,7 @@ export default function TextResult({ result }) {
                     <img src={result.author.profile_image_url} alt="" />
                 </div>
                 <div className={styles.textWrapper}>
-                    <h1>{result.author.name} <span className={styles.userName}>{result.author.username}</span></h1>
+                    <h1>{result.author.name} <span className={styles.userName}>@{result.author.username}</span></h1>
                     <p>{result.content}</p>
                 </div>
             </div>

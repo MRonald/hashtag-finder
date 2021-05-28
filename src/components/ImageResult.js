@@ -10,7 +10,7 @@ export default function ImageResult({ result }) {
         >
             <div className={styles.infoPost}>
                 <span>Postado por:</span>
-                <span>{result.author.username}</span>
+                <span>@{result.author.username}</span>
             </div>
         </div>
     );
