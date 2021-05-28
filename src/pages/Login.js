@@ -1,21 +1,25 @@
 import React, { useState } from 'react'
 import styles from "../styles/pages/Login.module.css"
 import Header from "../components/Header"
+import axios from 'axios'
+import { Redirect } from 'react-router';
 
 function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [logged, setLogged] = useState(false);
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    function getURL(email, pass) {
+        return `https://api.airtable.com/v0/app6wQWfM6eJngkD4/Login?api_key=key2CwkHb0CKumjuM&filterByFormula=(AND({Email}="${email}",{Senha}="${pass}",{Squad}="2"))`;
+    }
 
-    function handleEmail(e) {
-
-        setEmail(e.target.value)
-        console.log('target email:' + e.target.value)
+    function handleEmail(event) {
+        setEmail(event.target.value)
         clearErros()
     }
-    function handlePassword(e) {
-        setPassword(e.target.value)
-        console.log('target senha:' + e.target.value)
+
+    function handlePassword(event) {
+        setPassword(event.target.value)
     }
 
     function validateEmail() {
@@ -35,16 +39,22 @@ function Login() {
         }
     }
 
-    function handleSubmit(evt) {
-        evt.preventDefault(evt)
+    function handleSubmit(event) {
+        event.preventDefault(event)
         const emailValid = validateEmail()
         const passValid = validatePassword()
-        if (emailValid === false && passValid === false) {
-            console.log('campos ivalidos')
-        } else {
-            fetch('https://api.airtable.com/v0/app6wQWfM6eJngkD4/Login?api_key=key2CwkHb0CKumjuM&filterByFormula=(AND({Email}="{{contato@newtab.academy}}",{Senha}="123456"))')
-                .then((response) => response.json()).then((data) => console.log(data))
-
+        if (emailValid === true && passValid === true) {
+            axios.get(getURL(email, password)).then(
+                response => {
+                    if (response.data.records.length > 0) {
+                        sessionStorage.setItem('login', 'true');
+                        setLogged(true);
+                    } else {
+                        sessionStorage.setItem('login', 'false');
+                        setLogged(false);
+                    }
+                }
+            );
         }
 
     }
@@ -63,6 +73,7 @@ function Login() {
                     <i id="error"></i>
                     <input className={styles.inputLogin} type="password" placeholder="Senha" onChange={handlePassword} />
                     <input className={styles.buttonLogin} type="submit" value="ACESSAR" />
+                    {logged && <Redirect to="/historic" />}
                 </form>
             </div>
         </div>
