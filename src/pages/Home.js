@@ -11,6 +11,7 @@ import { BASE_URL_SEARCH } from '../config';
 
 // Images
 import iconSearch from '../assets/img/icon-search.svg';
+import noImage from '../assets/img/no-image.png';
 
 export default function Home() {
     const [buttonActive, setButtonActive] = useState('images');
@@ -68,7 +69,7 @@ export default function Home() {
             searchPosts(textSearch);
             setLastHashtag(textSearch);
         }
-        setTextSearch("");
+        setTextSearch('');
     }
 
     function registerSearch() {
@@ -103,21 +104,21 @@ export default function Home() {
                 const users = {};
                 response.data.includes.users.forEach(
                     user => {
-                        users[String(user.id)] = user.username || "";
+                        users[String(user.id)] = user.username || '';
                     }
                 );
 
                 const medias = {};
                 response.data.includes.media.forEach(
                     media => {
-                        medias[String(media.media_key)] = media.url || "";
+                        medias[String(media.media_key)] = media.url || noImage;
                     }
                 );
 
                 const results = response.data.data.map(
                     post => {
                         return {
-                            "url": `https://twitter.com/user/status/${post.id}`  || "",
+                            "url": `https://twitter.com/user/status/${post.id}`  || '',
                             "image_url": medias[String(post.attachments.media_keys[0])],
                             "author": {
                                 "username": users[String(post.author_id)]
@@ -136,10 +137,10 @@ export default function Home() {
                 response.data.includes.users.forEach(
                     user => {
                         users[String(user.id)] = {
-                            "name": user.name || "",
-                            "username": user.username || "",
-                            "profile_image_url": String(user.profile_image_url).replace('normal', 'bigger')  || "",
-                            "profile_url": `https://twitter.com/${user.username}`  || ""
+                            "name": user.name || '',
+                            "username": user.username || '',
+                            "profile_image_url": String(user.profile_image_url).replace('normal', 'bigger')  || noImage,
+                            "profile_url": `https://twitter.com/${user.username}`  || ''
                         };
                     }
                 );
@@ -147,8 +148,8 @@ export default function Home() {
                 const results = response.data.data.map(
                     post => {
                         return {
-                            "content": post.text  || "",
-                            "url": `https://twitter.com/user/status/${post.id}`  || "",
+                            "content": post.text  || '',
+                            "url": `https://twitter.com/user/status/${post.id}`  || '',
                             "author": users[String(post.author_id)]
                         };
                     }
