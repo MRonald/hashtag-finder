@@ -9,6 +9,7 @@
     align-items: flex-end;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center center;
     border-radius: 21px;
     overflow: hidden;
 }
@@ -21,7 +22,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-image: linear-gradient(to bottom, transparent, #00000079);
+    background-image: linear-gradient(to bottom, transparent, #000000ee);
 }
 
 .imageResultWrapper .infoPost span:first-child {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import styles from '../styles/pages/Home.module.css';
@@ -11,10 +11,20 @@ import { BASE_URL_SEARCH } from '../config';
 
 // Images
 import iconSearch from '../assets/img/icon-search.svg';
+import noImage from '../assets/img/no-image.png';
 
 export default function Home() {
-    const [buttonActive, setButtonActive] = useState("images");
-    const [textSearch, setTextSearch] = useState("");
+    const [buttonActive, setButtonActive] = useState('images');
+    const [textSearch, setTextSearch] = useState('');
+    const [imagesResult, setImagesResult] = useState([]);
+    const [textsResult, setTextsResult] = useState([]);
+    const [lastHashtag, setLastHashtag] = useState('backend');
+    const [invalid, setInvalid] = useState(false);
+
+    useEffect(() => {
+        searchPosts('backend');
+    }, []);
+
 
     function getCurrentDate() {
         const date = new Date();
@@ -31,26 +41,37 @@ export default function Home() {
         return `${hour}:${minute}`;
     }
 
+    function getURL(type, hashtag) {
+        if (type === 'image') {
+            return `https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query=${hashtag} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height&tweet.fields=source`;
+        } else if (type === 'text') {
+            return `https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query=${hashtag} has:hashtags -is:retweet -is:quote -has:links -has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height&tweet.fields=source`;
+        }
+    }
+
     function handleTextChange(event) {
         setTextSearch(event.target.value);
     }
 
     function validateForm() {
         if (textSearch.length < 1) {
+            setInvalid(true);
             return false;
         }
+        setInvalid(false);
         return true;
     }
 
     function submitForm(event) {
         event.preventDefault();
         const isValid = validateForm();
-        if (!isValid) {
-            alert('preencha o campo')
-        } else {
+        if (isValid) {
             registerSearch();
+            let withoutHash = textSearch;
+            searchPosts(withoutHash.replace(/#/g, ''));
+            setLastHashtag(withoutHash.replace(/#/g, ''));
         }
-        setTextSearch("");
+        setTextSearch('');
     }
 
     function registerSearch() {
@@ -73,6 +94,74 @@ export default function Home() {
         }).catch(e => console.log('erro\n' + e));
     }
 
+    function searchPosts(hashtag) {
+        const headers = {
+            headers: {
+                "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAFlKHgEAAAAApBW4nRyRkiogluzAbXlS4KuHlMU%3DFcR7r8N19LRnMHLVmYlFsod6Be6zUvZD2rxATotl6mLPAh2UEX"
+            }
+        }
+
+        axios.get(getURL('image', hashtag), headers).then(
+            response => {
+                const users = {};
+                response.data.includes.users.forEach(
+                    user => {
+                        users[String(user.id)] = user.username || '';
+                    }
+                );
+
+                const medias = {};
+                response.data.includes.media.forEach(
+                    media => {
+                        medias[String(media.media_key)] = media.url || noImage;
+                    }
+                );
+
+                const results = response.data.data.map(
+                    post => {
+                        return {
+                            "url": `https://twitter.com/user/status/${post.id}`  || '',
+                            "image_url": medias[String(post.attachments.media_keys[0])],
+                            "author": {
+                                "username": users[String(post.author_id)]
+                            }
+                        };
+                    }
+                );
+
+                setImagesResult(results);
+            }
+        )
+
+        axios.get(getURL('text', hashtag), headers).then(
+            response => {
+                const users = {};
+                response.data.includes.users.forEach(
+                    user => {
+                        users[String(user.id)] = {
+                            "name": user.name || '',
+                            "username": user.username || '',
+                            "profile_image_url": String(user.profile_image_url).replace('normal', 'bigger')  || noImage,
+                            "profile_url": `https://twitter.com/${user.username}`  || ''
+                        };
+                    }
+                );
+
+                const results = response.data.data.map(
+                    post => {
+                        return {
+                            "content": post.text  || '',
+                            "url": `https://twitter.com/user/status/${post.id}`  || '',
+                            "author": users[String(post.author_id)]
+                        };
+                    }
+                );
+
+                setTextsResult(results);
+            }
+        );
+    }
+
     return (
         <div>
             <div className={styles.hero}>
@@ -82,7 +171,10 @@ export default function Home() {
                         <h1>Encontre hashtags de maneira fácil.</h1>
                         <h2>Digite o que deseja no campo de buscas e confira os resultados do Twitter abaixo</h2>
                     </div>
-                    <form onSubmit={submitForm}>
+                    <form
+                        onSubmit={submitForm}
+                        style={{border: !invalid ? 'none' : '1px solid red'}}
+                    >
                         <button>
                             <img src={iconSearch} alt="" />
                         </button>
@@ -92,8 +184,19 @@ export default function Home() {
                             className={styles.inputMain}
                             value={textSearch}
                             onChange={handleTextChange}
+                            maxLength="140"
                         />
                     </form>
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            color: 'red',
+                            textTransform: 'uppercase',
+                            display: !invalid ? 'none' : 'block'
+                        }}
+                    >
+                        preencha este campo
+                    </div>
                 </div>
             </div>
             <div className={styles.transition}>
@@ -125,43 +228,79 @@ export default function Home() {
                 </div>
             </div>
             <div className={styles.mainContentWrapper}>
-                <h2>Exibindo os 10 resultados mais recentes para #natureza</h2>
+                <h2>Exibindo os 10 resultados mais recentes para #{lastHashtag}</h2>
                 <main className={styles.mainContent}>
                     <div className={styles.imagesResults}>
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
-                        <ImageResult userName="@twitterusername" />
+                        {imagesResult.length === 0 ? (
+                            <div>Carregando</div>
+                        ) : (
+                            <ul>
+                                {
+                                    imagesResult.map(
+                                        (result, index) => (
+                                            <li key={index}>
+                                                <ImageResult result={result}/>
+                                            </li>
+                                        )
+                                    )
+                                }
+                            </ul>
+                        )}
                     </div>
                     <div className={styles.textsResults}>
-                        <TextResult name="UserName" userName="@twitterusername" />
-                        <TextResult name="UserName" userName="@twitterusername" />
-                        <TextResult name="UserName" userName="@twitterusername" />
-                        <TextResult name="UserName" userName="@twitterusername" />
-                        <TextResult name="UserName" userName="@twitterusername" />
+                        {textsResult.length === 0 ? (
+                            <div>Carregando</div>
+                        ) : (
+                            <ul>
+                                {
+                                    textsResult.map(
+                                        (result, index) => (
+                                            <li key={index}>
+                                                <TextResult result={result}/>
+                                            </li>
+                                        )
+                                    )
+                                }
+                            </ul>
+                        )}
                     </div>
                 </main>
                 <main className={styles.mainContentResponsive}>
                     {buttonActive === 'images' ? (
                         <div className={styles.imagesResults}>
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
-                            <ImageResult userName="@twitterusername" />
+                            {imagesResult.length === 0 ? (
+                                <div>Carregando</div>
+                            ) : (
+                                <ul>
+                                    {
+                                        imagesResult.map(
+                                            (result, index) => (
+                                                <li key={index}>
+                                                    <ImageResult result={result}/>
+                                                </li>
+                                            )
+                                        )
+                                    }
+                                </ul>
+                            )}
                         </div>
                     ) : (
                         <div className={styles.textsResults}>
-                            <TextResult name="UserName" userName="@twitterusername" />
-                            <TextResult name="UserName" userName="@twitterusername" />
+                            {textsResult.length === 0 ? (
+                                <div>Carregando</div>
+                            ) : (
+                                <ul>
+                                    {
+                                        textsResult.map(
+                                            (result, index) => (
+                                                <li key={index}>
+                                                    <TextResult result={result}/>
+                                                </li>
+                                            )
+                                        )
+                                    }
+                                </ul>
+                            )}
                         </div>
                     )}
                 </main>
