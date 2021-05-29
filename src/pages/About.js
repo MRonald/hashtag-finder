@@ -1,29 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from "../styles/pages/About.module.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+//import das imagens//
 import ilustração from './../assets/img/about-ilustration.svg';
 import github from './../assets/img/icon-github.svg';
 import email from './../assets/img/icon-envelope.svg';
 import linkedin from './../assets/img/icon-awesome-linkedin.svg';
 
+
 function About() {
+    const [paragh, setParagh] = useState("");
+    const [seniors, setSeniors] = useState([]);
+    useEffect (()=>{   
+        //chamada dados sobre 
+        axios.get('https://api.airtable.com/v0/app6wQWfM6eJngkD4/Projeto?maxRecords=3&view=Grid%20view&api_key=key2CwkHb0CKumjuM')
+        .then(function  (response) {
+        //console.log('API Paragrafo-->',(response.data.records[1].fields.Sobre));
+        setParagh(response.data.records[1].fields.Sobre)
+        })
+        .catch(function  (error) {
+        console.log(error);
+        });
+        //chamada da equipe
+        axios.get("https://api.airtable.com/v0/app6wQWfM6eJngkD4/Equipe?api_key=key2CwkHb0CKumjuM&filterByFormula=({Squad}='2')")
+        .then(function (response) {
+            console.log("API Equipe-->",response.data.records)
+
+            setSeniors(response.data.records)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }, [])
+    // fim da chamda api no conteudo sobre
+
+
     return <div className={styles.bgabout} >
         <Header template="home" />
         <div className={styles.firstContent} > { /*primeiro conteudo */}
             <div className={styles.divsobreprojeto} >
                 <h1 className={styles.titulosobreprojeto} > Sobre o Projeto </h1>
+                {/*paragrafo da descrição do projeto*/}
                 <p className={styles.paragrafosobreprojeto} >
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                    sed diam nonumy eirmod tempor invidunt ut labore
-                    et dolore magna aliquyam erat, sed diam voluptua.
-                    At vero eos et accusam et justo duo dolores et ea
-                    rebum.Stet clita kasd gubergren,
-                    no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                    At vero eos et accusam et justo duo dolores et ea
-                    rebum.Stet clita kasd gubergren,
-                    no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                {paragh}
                 </p>
+                  
             </div>
             <div className={styles.divilustration} >
                 <img src={ilustração}
@@ -34,44 +57,31 @@ function About() {
         <h1 className={styles.who}>Quem somos</h1>
         <div className={styles.wrapperflex}>
         {/* USUARIOS */}
-            <div className={styles.container}>
-                <div className={styles.bannerimg}></div>
-                <img src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/99b20742-4dba-46de-864c-4e2fe5fb3f4f/d4hhdbc-10e39559-98ac-42c4-a4b2-7f08c1b799f7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk5YjIwNzQyLTRkYmEtNDZkZS04NjRjLTRlMmZlNWZiM2Y0ZlwvZDRoaGRiYy0xMGUzOTU1OS05OGFjLTQyYzQtYTRiMi03ZjA4YzFiNzk5ZjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.X_VZom3qdcKcETuLbIevHqF2wEpo21tYmHgfA57Xtdk' alt='profile' className={styles.profileimg}/>
-                <h1 className={styles.name}>Nome Sobrenome</h1>
-                <p className={styles.description}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...</p>
-                <img className={styles.github} src={github} alt="" />
-                <img className={styles.email} src={email} alt="" />
-                <img className={styles.linkedin} src={linkedin} alt="" />
-            </div>
-            <div className={styles.container}>
-                <div className={styles.bannerimg}></div>
-                <img src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/99b20742-4dba-46de-864c-4e2fe5fb3f4f/d4hhdbc-10e39559-98ac-42c4-a4b2-7f08c1b799f7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk5YjIwNzQyLTRkYmEtNDZkZS04NjRjLTRlMmZlNWZiM2Y0ZlwvZDRoaGRiYy0xMGUzOTU1OS05OGFjLTQyYzQtYTRiMi03ZjA4YzFiNzk5ZjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.X_VZom3qdcKcETuLbIevHqF2wEpo21tYmHgfA57Xtdk' alt='profile' className={styles.profileimg}/>
-                <h1 className={styles.name}>Nome Sobrenome</h1>
-                <p className={styles.description}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...</p>
-                <img className={styles.github} src={github} alt=""/>
-                <img className={styles.email} src={email} alt=""/>
-                <img className={styles.linkedin} src={linkedin} alt=""/>
-            </div>
-            <div className={styles.container}>
-                <div className={styles.bannerimg}></div>
-                <img src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/99b20742-4dba-46de-864c-4e2fe5fb3f4f/d4hhdbc-10e39559-98ac-42c4-a4b2-7f08c1b799f7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk5YjIwNzQyLTRkYmEtNDZkZS04NjRjLTRlMmZlNWZiM2Y0ZlwvZDRoaGRiYy0xMGUzOTU1OS05OGFjLTQyYzQtYTRiMi03ZjA4YzFiNzk5ZjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.X_VZom3qdcKcETuLbIevHqF2wEpo21tYmHgfA57Xtdk' alt='profile' className={styles.profileimg}/>
-                <h1 className={styles.name}>Nome Sobrenome</h1>
-                <p className={styles.description}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...</p>
-                <img className={styles.github} src={github} alt=""/>
-                <img className={styles.email} src={email} alt=""/>
-                <img className={styles.linkedin} src={linkedin} alt=""/>
-            </div>
-            <div className={styles.container}>
-                <div className={styles.bannerimg}></div>
-                <img src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/99b20742-4dba-46de-864c-4e2fe5fb3f4f/d4hhdbc-10e39559-98ac-42c4-a4b2-7f08c1b799f7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk5YjIwNzQyLTRkYmEtNDZkZS04NjRjLTRlMmZlNWZiM2Y0ZlwvZDRoaGRiYy0xMGUzOTU1OS05OGFjLTQyYzQtYTRiMi03ZjA4YzFiNzk5ZjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.X_VZom3qdcKcETuLbIevHqF2wEpo21tYmHgfA57Xtdk' alt='profile' className={styles.profileimg}/>
-                <h1 className={styles.name}>Nome Sobrenome</h1>
-                <p className={styles.description}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...</p>
-                <img className={styles.github} src={github} alt=""/>
-                <img className={styles.email} src={email} alt=""/>
-                <img className={styles.linkedin} src={linkedin} alt=""/>
-            </div>
-        </div>
+        {seniors.map (
+            SR => (
 
+            <div className={styles.container}>
+
+                <img src={SR.fields['Imagem de perfil'][0].url} alt='profile' className={styles.profileimg}/>
+
+                <h1 className={styles.name}>{SR.fields.Nome}</h1>
+                <p className={styles.description}>{SR.fields.Descrição}</p>
+                <div className={styles.social}>
+                    <a href={SR.fields.Github} target='_blank' rel="noopener noreferrer">
+                        <img className={styles.github} src={github} alt=""/>
+                    </a>
+                    <a href={"mailto:" + SR.fields.Email} target='_blank' rel="noopener noreferrer">
+                        <img className={styles.email} src={email} alt=""/>
+                    </a>
+                    <a href={SR.fields.LinkedIn} target='_blank' rel="noopener noreferrer">
+                        <img className={styles.linkedin} src={linkedin} alt=""/>
+                    </a>
+                </div>
+            </div>
+
+                )
+            )}
+        </div>
 
         <Footer />
         </div>
