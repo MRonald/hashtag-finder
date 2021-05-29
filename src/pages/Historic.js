@@ -8,7 +8,7 @@ export default function Historic() {
     const [searchItems, setSearchItems] = useState([]);
 
     function getURL() {
-        return `https://api.airtable.com/v0/app6wQWfM6eJngkD4/Buscas?filterByFormula=({Squad}='2')`;
+        return `https://api.airtable.com/v0/app6wQWfM6eJngkD4/Buscas?filterByFormula=({Squad}='2')&_Limit='5'`;
     }
 
     useEffect(() => {
