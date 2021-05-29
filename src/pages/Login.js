@@ -15,7 +15,6 @@ function Login() {
 
     function handleEmail(event) {
         setEmail(event.target.value)
-        clearErros()
     }
 
     function handlePassword(event) {
@@ -24,7 +23,6 @@ function Login() {
 
     function validateEmail() {
         if (email === "") {
-            document.getElementById('error').innerHTML = `Email incorreto`
             return false
         } else {
             return true
@@ -59,20 +57,33 @@ function Login() {
 
     }
 
-    function clearErros() {
-        document.getElementById('error').innerHTML = ''
-    }
-
     return (
         <div className={styles.containerLogin}>
             <Header template="login" />
             <div className={styles.bgLogin}>
                 <form className={styles.login} onSubmit={handleSubmit}>
                     <div className={styles.titleLogin}>Login</div>
-                    <input className={styles.inputLogin} type="text" placeholder="Usuário" id="inpEmail" onChange={handleEmail} autoComplete='off' />
-                    <i id="error"></i>
-                    <input className={styles.inputLogin} type="password" placeholder="Senha" onChange={handlePassword} />
-                    <input className={styles.buttonLogin} type="submit" value="ACESSAR" />
+                    <input
+                        className={styles.inputLogin}
+                        type="email"
+                        placeholder="Usuário"
+                        id="inpEmail"
+                        autoComplete='off'
+                        onChange={handleEmail}
+                        required
+                    />
+                    <input
+                        className={styles.inputLogin}
+                        type="password"
+                        placeholder="Senha"
+                        onChange={handlePassword}
+                        required
+                    />
+                    <input
+                        className={styles.buttonLogin}
+                        type="submit"
+                        value="ACESSAR"
+                    />
                     {logged && <Redirect to="/historic" />}
                 </form>
             </div>

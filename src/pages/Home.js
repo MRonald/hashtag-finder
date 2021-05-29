@@ -18,7 +18,6 @@ export default function Home() {
     const [imagesResult, setImagesResult] = useState([]);
     const [textsResult, setTextsResult] = useState([]);
     const [lastHashtag, setLastHashtag] = useState('backend');
-    const [invalid, setInvalid] = useState(false);
 
     useEffect(() => {
         searchPosts('backend');
@@ -56,24 +55,12 @@ export default function Home() {
         setTextSearch(event.target.value);
     }
 
-    function validateForm() {
-        if (textSearch.length < 1) {
-            setInvalid(true);
-            return false;
-        }
-        setInvalid(false);
-        return true;
-    }
-
     function submitForm(event) {
         event.preventDefault();
-        const isValid = validateForm();
-        if (isValid) {
-            registerSearch();
-            let withoutHash = textSearch;
-            searchPosts(withoutHash.replace(/#/g, ''));
-            setLastHashtag(withoutHash.replace(/#/g, ''));
-        }
+        // registerSearch();
+        let withoutHash = textSearch;
+        searchPosts(withoutHash.replace(/#/g, ''));
+        setLastHashtag(withoutHash.replace(/#/g, ''));
         setTextSearch('');
     }
 
@@ -174,10 +161,7 @@ export default function Home() {
                         <h1>Encontre hashtags de maneira fácil.</h1>
                         <h2>Digite o que deseja no campo de buscas e confira os resultados do Twitter abaixo</h2>
                     </div>
-                    <form
-                        onSubmit={submitForm}
-                        style={{border: !invalid ? 'none' : '1px solid red'}}
-                    >
+                    <form onSubmit={submitForm}>
                         <button>
                             <img src={iconSearch} alt="" />
                         </button>
@@ -188,18 +172,9 @@ export default function Home() {
                             value={textSearch}
                             onChange={handleTextChange}
                             maxLength="140"
+                            required
                         />
                     </form>
-                    <div
-                        style={{
-                            textAlign: 'center',
-                            color: 'red',
-                            textTransform: 'uppercase',
-                            display: !invalid ? 'none' : 'block'
-                        }}
-                    >
-                        preencha este campo
-                    </div>
                 </div>
             </div>
             <div className={styles.transition}>
