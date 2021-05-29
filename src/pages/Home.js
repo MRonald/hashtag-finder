@@ -57,7 +57,7 @@ export default function Home() {
 
     function submitForm(event) {
         event.preventDefault();
-        // registerSearch();
+        registerSearch();
         let withoutHash = textSearch;
         searchPosts(withoutHash.replace(/#/g, ''));
         setLastHashtag(withoutHash.replace(/#/g, ''));
