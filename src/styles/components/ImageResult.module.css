@@ -12,6 +12,7 @@
     background-position: center center;
     border-radius: 21px;
     overflow: hidden;
+    transition: all .7s;
 }
 
 .imageResultWrapper .infoPost {
@@ -33,6 +34,10 @@
     margin-top: 10px;
     font-size: 1.2rem;
     font-weight: 400;
+}
+
+.zoomView {
+    transform: scale(1.4);
 }
 
 @media only screen and (max-width: 1000px) {

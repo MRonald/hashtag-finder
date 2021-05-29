@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ImageResult from '../components/ImageResult';
 import TextResult from '../components/TextResult';
-import { BASE_URL_SEARCH } from '../config';
 
 // Images
 import iconSearch from '../assets/img/icon-search.svg';
@@ -19,7 +18,6 @@ export default function Home() {
     const [imagesResult, setImagesResult] = useState([]);
     const [textsResult, setTextsResult] = useState([]);
     const [lastHashtag, setLastHashtag] = useState('backend');
-    const [invalid, setInvalid] = useState(false);
 
     useEffect(() => {
         searchPosts('backend');
@@ -41,7 +39,7 @@ export default function Home() {
         return `${hour}:${minute}`;
     }
 
-    function getURL(type, hashtag) {
+    function getURLTwitter(type, hashtag) {
         if (type === 'image') {
             return `https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query=${hashtag} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height&tweet.fields=source`;
         } else if (type === 'text') {
@@ -49,33 +47,25 @@ export default function Home() {
         }
     }
 
+    function getURLAirtable() {
+        return `https://api.airtable.com/v0/app6wQWfM6eJngkD4/Buscas`;
+    }
+
     function handleTextChange(event) {
         setTextSearch(event.target.value);
     }
 
-    function validateForm() {
-        if (textSearch.length < 1) {
-            setInvalid(true);
-            return false;
-        }
-        setInvalid(false);
-        return true;
-    }
-
     function submitForm(event) {
         event.preventDefault();
-        const isValid = validateForm();
-        if (isValid) {
-            registerSearch();
-            let withoutHash = textSearch;
-            searchPosts(withoutHash.replace(/#/g, ''));
-            setLastHashtag(withoutHash.replace(/#/g, ''));
-        }
+        registerSearch();
+        let withoutHash = textSearch;
+        searchPosts(withoutHash.replace(/#/g, ''));
+        setLastHashtag(withoutHash.replace(/#/g, ''));
         setTextSearch('');
     }
 
     function registerSearch() {
-        axios.post(BASE_URL_SEARCH, {
+        axios.post(getURLAirtable(), {
             "records": [
                 {
                     "fields": {
@@ -101,7 +91,7 @@ export default function Home() {
             }
         }
 
-        axios.get(getURL('image', hashtag), headers).then(
+        axios.get(getURLTwitter('image', hashtag), headers).then(
             response => {
                 const users = {};
                 response.data.includes.users.forEach(
@@ -133,7 +123,7 @@ export default function Home() {
             }
         )
 
-        axios.get(getURL('text', hashtag), headers).then(
+        axios.get(getURLTwitter('text', hashtag), headers).then(
             response => {
                 const users = {};
                 response.data.includes.users.forEach(
@@ -171,10 +161,7 @@ export default function Home() {
                         <h1>Encontre hashtags de maneira fácil.</h1>
                         <h2>Digite o que deseja no campo de buscas e confira os resultados do Twitter abaixo</h2>
                     </div>
-                    <form
-                        onSubmit={submitForm}
-                        style={{border: !invalid ? 'none' : '1px solid red'}}
-                    >
+                    <form onSubmit={submitForm}>
                         <button>
                             <img src={iconSearch} alt="" />
                         </button>
@@ -185,18 +172,9 @@ export default function Home() {
                             value={textSearch}
                             onChange={handleTextChange}
                             maxLength="140"
+                            required
                         />
                     </form>
-                    <div
-                        style={{
-                            textAlign: 'center',
-                            color: 'red',
-                            textTransform: 'uppercase',
-                            display: !invalid ? 'none' : 'block'
-                        }}
-                    >
-                        preencha este campo
-                    </div>
                 </div>
             </div>
             <div className={styles.transition}>

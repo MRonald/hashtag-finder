@@ -58,6 +58,9 @@
     margin-bottom: 1rem;
     margin-left: 1rem;
     border: 1px solid rgb(255 255 255 / 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .bannerimg {
     position: absolute;
@@ -67,11 +70,14 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
-  
+    
   .profileimg {
-    width: 8rem;
+    width: 128px;
     clip-path: circle(60px at center);
     margin-top: 1.5rem;
+    align-self: center;
+    object-fit: cover; /*ajusta o enquadramento da imagen de tamanhos diferentes*/
+    height: 128px;
   }
   
   .name {

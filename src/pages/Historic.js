@@ -33,11 +33,8 @@ export default function Historic() {
     }, []);
 
     return (
-
         <div className={styles.body}>
-
             <Header template="tableSearch" />
-
             <div className={styles.container}>
                 <h2>Buscas realizadas</h2>
                 <div className={styles.list}>
@@ -54,12 +51,7 @@ export default function Historic() {
                         searchItems.map(item => <SearchItem item={item} />)
                     }
                 </div>
-
             </div>
-
         </div>
-
-
-
     );
 }
