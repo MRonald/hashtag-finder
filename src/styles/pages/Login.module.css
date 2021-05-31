@@ -45,6 +45,11 @@
     font-weight: bolder;
 }
 
+.accessDenied {
+    margin: 20px auto 0;
+    color: #ec4444;
+}
+
 .buttonLogin {
     background-color: #72EFDB;
     font-weight: bolder;
