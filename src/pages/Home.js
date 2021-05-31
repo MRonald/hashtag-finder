@@ -57,20 +57,27 @@ export default function Home() {
 
     function submitForm(event) {
         event.preventDefault();
-        registerSearch();
-        let withoutHash = textSearch;
-        searchPosts(withoutHash.replace(/#/g, ''));
-        setLastHashtag(withoutHash.replace(/#/g, ''));
+        registerSearch(getProcessedData());
+        searchPosts(getProcessedData());
+        setLastHashtag(getProcessedData());
         setTextSearch('');
     }
 
-    function registerSearch() {
+    function getProcessedData() {
+        let processedData = textSearch;
+        processedData = processedData
+            .replace(/#/g, '')
+            .trim();
+        return processedData;
+    }
+
+    function registerSearch(hashtag) {
         axios.post(getURLAirtable(), {
             "records": [
                 {
                     "fields": {
                         "Squad": "2",
-                        "Hashtag": textSearch,
+                        "Hashtag": hashtag,
                         "Data": getCurrentDate(),
                         "Hora": getCurrentHour()
                     }
