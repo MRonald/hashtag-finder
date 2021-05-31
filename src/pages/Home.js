@@ -67,7 +67,8 @@ export default function Home() {
         let processedData = textSearch;
         processedData = processedData
             .replace(/#/g, '')
-            .trim();
+            .trim()
+            .toLowerCase();
         return processedData;
     }
 
