@@ -1,7 +1,9 @@
 .body {
     width: 100%;
     height: 100%;
-    background: url(../../assets/img/table-bg.jpg) no-repeat #18326B ;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: url(../../assets/img/table-bg.jpg) no-repeat #18326B;
     background-size: cover;
     padding-bottom: 50px;
 }
@@ -55,6 +57,12 @@
     margin: 0 40px 0 50px;
 }
 
+.accessDenied {
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: justify;
+}
+
 @media (max-width: 800px){
     .container{
         width: 90%;
@@ -71,16 +79,16 @@
         width: 95%;
     }
 
-    .time {        
+    .time {
             margin: 0 10px 0 10px;
-        
-    }   
+
+    }
 
 }
 
 
 @media (max-width: 420px){
-  
+
 
     .container h2 {
         text-align: center;
