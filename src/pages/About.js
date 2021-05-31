@@ -19,7 +19,6 @@ export default function About() {
         //chamada dados sobre
         axios.get('https://api.airtable.com/v0/app6wQWfM6eJngkD4/Projeto?view=Grid%20view&filterByFormula=({Squad}="2")&api_key=key2CwkHb0CKumjuM')
             .then(function (response) {
-                console.log(response.data);
                 setDescription(response.data.records[0].fields.Sobre)
             })
             .catch(function (error) {
