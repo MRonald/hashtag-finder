@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from '../styles/pages/About.module.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import DeveloperCard from '../components/DeveloperCard';
+
+import styles from '../styles/pages/About.module.css';
 
 //import das imagens//
 import ilustração from './../assets/img/about-ilustration.svg';
-import github from './../assets/img/icon-github.svg';
-import email from './../assets/img/icon-envelope.svg';
-import linkedin from './../assets/img/icon-awesome-linkedin.svg';
 
 
 export default function About() {
@@ -55,31 +54,18 @@ export default function About() {
 
             <h1 className={styles.who}>Quem somos</h1>
             <div className={styles.wrapperflex}>
-                {/* Devs do projeto */}
-                {seniors.map(
-                    SR => (
-
-                        <div className={styles.container}>
-
-                            <img src={SR.fields['Imagem de perfil'][0].url} alt='profile' className={styles.profileimg} />
-
-                            <h1 className={styles.name}>{SR.fields.Nome}</h1>
-                            <p className={styles.description}>{SR.fields.Descrição}</p>
-                            <div className={styles.social}>
-                                <a href={SR.fields.Github} target='_blank' rel="noopener noreferrer">
-                                    <img className={styles.github} src={github} alt="" />
-                                </a>
-                                <a href={"mailto:" + SR.fields.Email} target='_blank' rel="noopener noreferrer">
-                                    <img className={styles.email} src={email} alt="" />
-                                </a>
-                                <a href={SR.fields.LinkedIn} target='_blank' rel="noopener noreferrer">
-                                    <img className={styles.linkedin} src={linkedin} alt="" />
-                                </a>
-                            </div>
-                        </div>
-
-                    )
-                )}
+                <ul>
+                    {
+                        /* Devs do projeto */
+                        seniors.map(
+                            (SR, index) => (
+                                <li key={index}>
+                                    <DeveloperCard dev={SR} />
+                                </li>
+                            )
+                        )
+                    }
+                </ul>
             </div>
 
             <Footer />
