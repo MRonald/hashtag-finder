@@ -9,7 +9,7 @@ export default function Historic() {
     const [logged, setLogged] = useState(false);
 
     function getURL() {
-        return `https://api.airtable.com/v0/app6wQWfM6eJngkD4/Buscas?filterByFormula=({Squad}='2')&sort[0][field]=Data&sort[0][direction]=desc`;
+        return `https://api.airtable.com/v0/app6wQWfM6eJngkD4/Buscas?filterByFormula=({Squad}='2')&sort%5B0%5D%5Bfield%5D=Data&sort%5B0%5D%5Bdirection%5D=desc&sort%5B1%5D%5Bfield%5D=Hora&sort%5B1%5D%5Bdirection%5D=desc`;
     }
 
     useEffect(() => {
@@ -51,12 +51,16 @@ export default function Historic() {
                                     <div className={styles.time}>Hora</div>
                                 </div>
                             </div>
-                            <>
+                            <ul>
                                 {
                                     /* Dados das buscas realizadas */
-                                    searchItems.map(item => <SearchItem item={item} />)
+                                    searchItems.map((item, index) => (
+                                        <li key={index}>
+                                            <SearchItem item={item} />
+                                        </li>
+                                    ))
                                 }
-                            </>
+                            </ul>
                         </>
                     ) : (
                         <p className={styles.accessDenied}>Você não tem permissão para acessar essa página</p>
